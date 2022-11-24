@@ -9,7 +9,7 @@ public class ImageData implements Data{
 
     /**
      * TrainData Constructor
-     * @param data: 2D array of the RGB values contained by the image
+     * @param data: 2D array of the rgb values contained by the image
      * @param filename: Name of the out file
      */
     ImageData(ArrayList<ArrayList<Integer>> data, String filename) {
@@ -32,11 +32,18 @@ public class ImageData implements Data{
             }
 
             try {
-                v.write(filename, (out.toArray(new String[0])));
+                v.write(filename, out);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
             out.clear();
+        }
+
+        // Separates each image
+        try {
+            v.write(filename, new ArrayList<String>() {{add("--------------");}});
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

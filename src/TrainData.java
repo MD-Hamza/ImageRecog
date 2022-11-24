@@ -33,9 +33,10 @@ public class TrainData implements Data {
                 out.add(i + ",");
             }
             out.add(String.valueOf(counts.get(line)));
+
+            // Writes one line at a time to avoid running out of memory storing everything in variable out
             try {
-                // Writes one line at a time to avoid running out of memory storing everything in out
-                v.write(filename, out.toArray(new String[0]));
+                v.write(filename, out);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
