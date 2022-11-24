@@ -30,7 +30,6 @@ public class ImageData implements Data{
             for (int i : line) {
                 out.add(i + ",");
             }
-
             try {
                 v.write(filename, out);
             } catch (IOException e) {

@@ -26,6 +26,7 @@ public class DataVisitor implements Visitor{
         for (String item : data) {
             writer.write(item);
         }
+
         writer.write("\n");
         writer.close();
     }
