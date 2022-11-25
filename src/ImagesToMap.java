@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ImagesToMap {
-    private ArrayList rgbVals;
+    private ArrayList<ArrayList<Double>> rgbVals;
 
     public void setMapofImage(String fileName) {
         Image image = new Image(fileName);
@@ -32,11 +32,15 @@ public class ImagesToMap {
         green = green / n;
         blue = blue / n;
 
-        double[] col = new double[]{red, blue, green};
+        ArrayList<Double> col = new ArrayList<>();
+        col.add(red);
+        col.add(green);
+        col.add(blue);
+
         rgbVals.add(col);
     }
 
-    public ArrayList<Arrays> getRgbVals() {
+    public ArrayList<ArrayList<Double>> getRgbVals() {
         return rgbVals;
     }
 }
