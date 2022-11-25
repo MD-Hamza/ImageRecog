@@ -26,8 +26,15 @@ public class DataVisitor implements Visitor{
         for (String item : data) {
             writer.write(item);
         }
-
         writer.write("\n");
         writer.close();
+    }
+
+    /**
+     * Clears the previous data if images need to be removed or model needs to be retrained
+     * @param filename: file that will be cleared
+     */
+    public void clear(String filename) throws IOException {
+        new FileWriter(filename, false).close();
     }
 }
