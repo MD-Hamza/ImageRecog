@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TrainData implements Data {
-    private HashMap<ArrayList<Integer>, Integer> counts;
+    private HashMap<ArrayList<Double>, Integer> counts;
     private String filename;
 
     /**
@@ -14,7 +14,7 @@ public class TrainData implements Data {
      *                   maps the number of times similar rows comes up in the image being classified
      * @param filename: Name of the out file
      */
-    TrainData(HashMap<ArrayList<Integer>, Integer> trainedData, String filename) {
+    TrainData(HashMap<ArrayList<Double>, Integer> trainedData, String filename) {
         this.counts = trainedData;
         this.filename = filename;
     }
@@ -27,12 +27,13 @@ public class TrainData implements Data {
     @Override
     public void Accept(DataVisitor v) {
         ArrayList<String> out = new ArrayList<>();
-        for (ArrayList<Integer> line : counts.keySet()) {
+        for (ArrayList<Double> line : counts.keySet()) {
             // Goes through each of the rgb values in a given image row and writes to a file
-            for (int i : line) {
+            for (Double i : line) {
                 out.add(i + ",");
             }
             out.add(String.valueOf(counts.get(line)));
+            
             // Writes one line at a time to avoid running out of memory storing everything in variable out
             try {
                 v.write(filename, out);

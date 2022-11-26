@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImageData implements Data{
-    private ArrayList<ArrayList<Integer>> data;
+    private ArrayList<ArrayList<Double>> data;
     private String filename;
 
     /**
@@ -12,7 +12,7 @@ public class ImageData implements Data{
      * @param data: 2D array of the rgb values contained by the image
      * @param filename: Name of the out file
      */
-    ImageData(ArrayList<ArrayList<Integer>> data, String filename) {
+    ImageData(ArrayList<ArrayList<Double>> data, String filename) {
         this.data = data;
         this.filename = filename;
     }
@@ -25,9 +25,9 @@ public class ImageData implements Data{
     @Override
     public void Accept(DataVisitor v) {
         ArrayList<String> out = new ArrayList<>();
-        for (ArrayList<Integer> line : data) {
+        for (ArrayList<Double> line : data) {
             // Goes through each of the pixels groupings in a given image row and writes to a file
-            for (int i : line) {
+            for (Double i : line) {
                 out.add(i + ",");
             }
             try {
