@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VisitorTests {
     @Test
     void testTrainWriting() throws IOException {
-        ArrayList<Integer> row = new ArrayList<>();
+        ArrayList<Double> row = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            row.add(i);
+            row.add((double) i);
         }
-        HashMap<ArrayList<Integer>, Integer> counts = new HashMap<>();
+        HashMap<ArrayList<Double>, Integer> counts = new HashMap<>();
         counts.put(row, 12);
         TrainData data = new TrainData(counts, "out.txt");
         DataVisitor visitor = new DataVisitor();
@@ -25,16 +25,16 @@ public class VisitorTests {
         visitor.visitTrain(data);
 
         Scanner reader = new Scanner(new File("out.txt"));
-        assertEquals("0,1,2,3,4,5,6,7,8,9,12", reader.nextLine());
+        assertEquals("0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,12", reader.nextLine());
     }
 
     @Test
     void testImageWriting() throws IOException {
-        ArrayList<ArrayList<Integer>> image = new ArrayList<>();
+        ArrayList<ArrayList<Double>> image = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            ArrayList<Integer> row = new ArrayList<>();
+            ArrayList<Double> row = new ArrayList<>();
             for (int j = 0; j < 30; j++) {
-                row.add(i);
+                row.add((double) i);
             }
             image.add(row);
         }
@@ -48,7 +48,7 @@ public class VisitorTests {
         for (int i = 0; i < 30; i++) {
             StringBuilder expected = new StringBuilder();
             for (int j = 0; j < 30; j++) {
-                expected.append(i).append(",");
+                expected.append((double) i).append(",");
             }
             assertEquals(expected.toString(), reader.nextLine());
         }
