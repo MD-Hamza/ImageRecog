@@ -1,14 +1,12 @@
 package src;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class UploadCommand implements Command{
-    private ArrayList<BufferedImage> imgSet;
+    private BufferedImage img;
     // private Receiver ImageConverter;
-
-    public UploadCommand(ArrayList<BufferedImage> imgStore){
-        this.imgSet = imgStore;
+    public UploadCommand(BufferedImage img2){
+        this.img = img2;
         execute();
     }
 
