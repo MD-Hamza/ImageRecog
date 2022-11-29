@@ -74,7 +74,12 @@ public class ImageRecognition extends Application {
                             return;
                         }
 
-                        // ThreadDelegator d = new ThreadDelegator(b, maxThreads, "classify");
+                        ThreadDelegator d = new ThreadDelegator(b, maxThreads, "classify");
+                        try {
+                            List<HashMap<SpecialImage, String>> result = d.send_commands();
+                        } catch (ExecutionException | InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
 
                     }
                 }
@@ -105,7 +110,12 @@ public class ImageRecognition extends Application {
                         else{
                             return;
                         }
-                        // ThreadDelegator d = new ThreadDelegator(b, maxThreads, "upload");
+                        ThreadDelegator d = new ThreadDelegator(b, maxThreads, "upload");
+                        try {
+                            List<HashMap<SpecialImage, String>> result = d.send_commands();
+                        } catch (ExecutionException | InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
         );
