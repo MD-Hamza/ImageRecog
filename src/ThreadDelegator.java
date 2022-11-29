@@ -1,41 +1,29 @@
 package src;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-class Task implements Runnable {
-    private final List<BufferedImage> images;
-
-    public Task(List<BufferedImage> images) {
-        this.images = images;
-    }
-
-    //TODO: Iterate over images in a cluster then invoke command on each image.
-    // Requires implementation of command pattern
-    public void run() {
-        System.out.println(this.images);
-        throw new UnsupportedOperationException();
-    }
-}
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 public class ThreadDelegator {
     public int max_threads;
-    public List<BufferedImage> images;
+    public List<SpecialImage> images;
     public int cluster_size;
+    private String command_type;
 
-    public ThreadDelegator(List<BufferedImage> images, int max_threads) {
-        this.max_threads = max_threads;
+    public ThreadDelegator(List<SpecialImage> images, int max_threads, String command_type) {
+        this.max_threads = (max_threads > 0) ? max_threads : 1;
+        System.out.println(this.max_threads);
         this.images = images;
-        this.cluster_size =  (int) (images.size() / max_threads);
+        this.cluster_size =  (int) (this.images.size() / this.max_threads);
+        this.command_type = command_type;
     }
 
-    private List<List<BufferedImage>> partition_images() {
+    private List<List<SpecialImage>> partition_images() {
 
-        List<List<BufferedImage>> partitions = new ArrayList<>();
-        List<BufferedImage> outliers = new ArrayList<>();
+        List<List<SpecialImage>> partitions = new ArrayList<>();
+        List<SpecialImage> outliers = new ArrayList<>();
 
         for (int i = 0; i < this.images.size(); i += cluster_size) {
 
@@ -58,7 +46,7 @@ public class ThreadDelegator {
                     partitions_index = 0;
                 }
 
-                List<BufferedImage> x = new ArrayList<>(partitions.get(partitions_index));
+                List<SpecialImage> x = new ArrayList<>(partitions.get(partitions_index));
 
                 x.add(outliers.get(outliers_index));
 
@@ -76,10 +64,10 @@ public class ThreadDelegator {
     private List<Task> form_cluster() {
 
         List<Task> all_tasks = new ArrayList<>();
-        List<List<BufferedImage>> parted_images = partition_images();
+        List<List<SpecialImage>> parted_images = partition_images();
 
-        for (List<BufferedImage> imgs : parted_images) {
-            Task x = new Task(imgs);
+        for (List<SpecialImage> imgs : parted_images) {
+            Task x = new Task(imgs, this.command_type);
             all_tasks.add(x);
         }
 
@@ -87,17 +75,22 @@ public class ThreadDelegator {
 
     }
 
-    public ArrayList<String> send_commands() {
+    public List<HashMap<SpecialImage, String>> send_commands() throws ExecutionException, InterruptedException {
         List<Task> cluster = form_cluster();
         ExecutorService pool = Executors.newFixedThreadPool(this.max_threads);
 
-        //TODO: Return List of results for image once Naive Bayes implemented
-        for (Task i : cluster) {
-            pool.execute(i);
-        }
+        List<CompletableFuture<HashMap<SpecialImage, String>>> taskFutures = cluster.stream()
+                .map(task -> CompletableFuture.supplyAsync(task, pool)).toList();
 
-        // Placeholder
-        return new ArrayList<>();
+        CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+                taskFutures.toArray(new CompletableFuture[0])
+        );
+
+        CompletableFuture<List<HashMap<SpecialImage, String>>> allTaskFutures = allFutures.thenApply(v ->
+                taskFutures.stream().map(CompletableFuture::join).collect(Collectors.toList()));
+
+        return allTaskFutures.get();
+
 
     }
 
