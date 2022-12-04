@@ -11,4 +11,13 @@ public class ModelDarkMode extends ModelViewMode {
         super(currView);
         this.javaFxObjectsToColours = objectsWithColours;
     }
+    public void updateCurrentViewMode(String chosenViewMode){
+
+    }
+    private void findDarkAreasOnScreen(HashMap<String, String> screenColour){
+
+    }
+    private  void reverseColour(){
+
+    }
 }
