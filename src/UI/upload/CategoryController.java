@@ -1,4 +1,4 @@
-package src.UI.classify;
+package src.UI.upload;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
