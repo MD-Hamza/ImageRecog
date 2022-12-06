@@ -1,10 +1,8 @@
-package src.UI;
+package src.UI.classify;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -14,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import src.ChooseFileButton;
-
-import java.io.IOException;
 
 import java.io.IOException;
 

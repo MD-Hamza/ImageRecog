@@ -1,4 +1,4 @@
-package src.UI;
+package src.UI.classify;
 
 import javafx.fxml.Initializable;
 

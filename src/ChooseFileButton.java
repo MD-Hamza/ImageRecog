@@ -32,6 +32,8 @@ public class ChooseFileButton {
     public ChooseFileButton(String category) {
         this.upload = new Button(category);
     }
+
+    public ChooseFileButton(Button btn) {this.upload = btn;}
     private final FileChooser fileChooser = new FileChooser();
 
     /**
