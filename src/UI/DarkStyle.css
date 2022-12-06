@@ -1,10 +1,12 @@
 /* CSS */
 
 .label {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #ffffff;
     -fx-font-family: "Inter-SemiBold";
     src: url('./Inter-SemiBold.ttf');
 }
+.root{
+-fx background-color: #000000}
 .button {
   -fx-text-fill: #ffffff;
   -fx-font-size: 16px;
