@@ -26,9 +26,10 @@ public class ImageRecognition extends Application {
     public void start(Stage stage) throws Exception {
         //Font.loadFont(getClass().getResource("UI/Inter-SemiBold.ttf").toExternalForm(), 10);
         Parent root = FXMLLoader.load(getClass().getResource("UI/categoryNumber.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("UI/mainMenu.fxml"));
         Scene scene = new Scene(root);
 
-        String css = this.getClass().getResource("UI/style.css").toExternalForm();
+        String css = this.getClass().getResource("UI/DarkStyle.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("Upload");
         stage.setScene(scene);
