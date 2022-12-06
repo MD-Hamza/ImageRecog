@@ -22,7 +22,7 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
 
             for (SpecialImage img : this.images) {
                 ClassifyCommand c = new ClassifyCommand(img.getImg());
-                results.put(img, c.getResult());
+                //results.put(img, c.getResult());
             }
 
 
@@ -31,7 +31,7 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
 
             for (SpecialImage img : this.images) {
                 UploadCommand u = new UploadCommand(img.getImg());
-                results.put(img, u.getResult());
+                //results.put(img, u.getResult());
             }
 
         }
