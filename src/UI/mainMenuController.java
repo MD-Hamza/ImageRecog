@@ -19,6 +19,7 @@ import javafx.stage.Window;
 import java.io.IOException;
 
 import static com.sun.javafx.scene.control.skin.Utils.getResource;
+import static javafx.application.Application.setUserAgentStylesheet;
 
 public class mainMenuController{
 
@@ -66,14 +67,23 @@ public class mainMenuController{
 
             currentView.setDark();
             css = currentView.getCurrentViewMode();
+            //System.out.println(css);
+
 
 
         }
         else{
             currentView.setLight();
             css = currentView.getCurrentViewMode();
+            //System.out.println(css);
 
         }
+
+        toggleView.getScene().getStylesheets().clear();
+        setUserAgentStylesheet(null);
+
+        String newCss = this.getClass().getResource(css).toExternalForm();
+        toggleView.getScene().getStylesheets().add(newCss);
     }
 
     /**
