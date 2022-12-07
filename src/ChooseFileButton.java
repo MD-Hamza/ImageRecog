@@ -15,6 +15,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import src.UI.Controller;
+import src.UI.classify.ClassifyController;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -27,13 +29,20 @@ import java.util.concurrent.ExecutionException;
 
 public class ChooseFileButton {
     Button upload;
+    Controller obj;
+    public String category;
     private final FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif", "*.jpeg", "*.webp", "*.jfif");
 
     public ChooseFileButton(String category) {
-        this.upload = new Button(category);
+        this.category = category;
+        this.upload = new Button(this.category);
     }
 
-    public ChooseFileButton(Button btn) {this.upload = btn;}
+    public ChooseFileButton(Button btn, Controller obj) {
+        this.category = null;
+        this.upload = btn;
+        this.obj = obj;
+    }
     private final FileChooser fileChooser = new FileChooser();
 
     /**
@@ -62,6 +71,7 @@ public class ChooseFileButton {
                         }
                     }
                 }
+                obj.onDialogClose(b);
             });
 
     }
