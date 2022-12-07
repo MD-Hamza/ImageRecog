@@ -24,8 +24,8 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
         if (this.command_type.equalsIgnoreCase("classify")) {
 
             for (SpecialImage img : this.images) {
-                ClassifyCommand c = new ClassifyCommand(img.getImg());
-                results.put(img, c.getResult());
+//                ClassifyCommand c = new ClassifyCommand(img.getImg());
+//                results.put(img, c.getResult());
             }
 
 
@@ -33,8 +33,8 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
         else if (this.command_type.equalsIgnoreCase("upload")) {
 
             for (SpecialImage img : this.images) {
-                UploadCommand u = new UploadCommand(img.getImg(), this.category);
-                results.put(img, u.getResult());
+//                UploadCommand u = new UploadCommand(img.getImg(), this.category);
+//                results.put(img, u.getResult());
             }
 
         }

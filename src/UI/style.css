@@ -29,6 +29,11 @@
   white-space: nowrap;*/
 }
 
+.toggle-button {
+  -fx-text-fill: #ffffff;
+  -fx-background-color: linear-gradient(to bottom right, #5F0A87, #A4508B);
+}
+
 .button:focus {
   -fx-box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }

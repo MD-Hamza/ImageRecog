@@ -37,7 +37,8 @@ public class ImageRecognition extends Application {
         Scene scene = new Scene(root);
         mainMenuController controllerViewMode = loader.getController();
         stage.setScene(scene);
-        String css = this.getClass().getResource(controllerViewMode.getCss()).toExternalForm();
+        //String css = this.getClass().getResource(controllerViewMode.getCss()).toExternalForm();
+        String css = this.getClass().getResource("UI/style.css").toExternalForm();
         //System.out.println(root.getClass());
         scene.getStylesheets().add(css);
         stage.setTitle("Upload");
