@@ -76,13 +76,6 @@ public class mainMenuController{
         toggleView.getScene().getStylesheets().add(newCss);
     }
 
-    /**
-     * Getter for the view mode. Commands the controller to set view to dark or light.
-     * @return
-     */
-    public String getCss(){
-        return css;
-    }
 
 
     /**
@@ -90,7 +83,6 @@ public class mainMenuController{
      * @param actionEvent
      * @throws RuntimeException
      */
-
     public void switchToClassify(ActionEvent actionEvent) {
         Parent root = null;
         try {
