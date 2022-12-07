@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -47,7 +48,7 @@ public class CategoryNamesController implements Controller {
         VBox forms = (VBox) scene.lookup("#forms");
         HBox trainButtons = new HBox(10);
         BorderPane sliderBox = new BorderPane();
-        sliderBox.setPadding(new Insets(10, 10, 50, 10));
+        sliderBox.setPadding(new Insets(10, 10, 40, 10));
 
         // Gets the category name from each of the forms
         for (Node n : forms.getChildren()) {
@@ -69,7 +70,19 @@ public class CategoryNamesController implements Controller {
         slider.setMin(1);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
-        sliderBox.setBottom(slider);
+        slider.setBlockIncrement(1);
+        slider.setMaxWidth(200);
+
+        Label threads = new Label("Maximum Threads:");
+        VBox sliderItems = new VBox();
+
+        sliderItems.getChildren().add(threads);
+        sliderItems.getChildren().add(slider);
+        sliderItems.setAlignment(Pos.CENTER);
+
+        sliderBox.setMaxHeight(325);
+        sliderBox.setBottom(sliderItems);
+        sliderBox.setAlignment(sliderItems,Pos.CENTER);
         sliderBox.setCenter(trainButtons);
         stack.getChildren().add(sliderBox);
 

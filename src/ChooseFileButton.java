@@ -21,6 +21,7 @@ import src.UI.classify.ClassifyController;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,6 +75,13 @@ public class ChooseFileButton {
                         }
                     }
                 }
+//                try {
+//                    UploadCommand c = new UploadCommand(this.images.get(0).getImg(), "blue");
+//                } catch (FileNotFoundException e) {
+//                    throw new RuntimeException(e);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
                 obj.onDialogClose(this);
             });
 
