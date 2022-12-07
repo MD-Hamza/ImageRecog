@@ -30,12 +30,15 @@ import java.util.concurrent.ExecutionException;
 public class ChooseFileButton {
     Button upload;
     Controller obj;
-    public String category;
+    private String category;
+
+    private ArrayList<SpecialImage> images;
     private final FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif", "*.jpeg", "*.webp", "*.jfif");
 
-    public ChooseFileButton(String category) {
+    public ChooseFileButton(String category, Controller obj) {
         this.category = category;
         this.upload = new Button(this.category);
+        this.obj = obj;
     }
 
     public ChooseFileButton(Button btn, Controller obj) {
@@ -55,7 +58,7 @@ public class ChooseFileButton {
                 if (fileChooser.getExtensionFilters().size() == 0) {
                     fileChooser.getExtensionFilters().add(filter);
                 }
-                ArrayList<SpecialImage> b = new ArrayList<>();
+                this.images = new ArrayList<>();
                 List<File> hold = fileChooser.showOpenMultipleDialog(primaryStage);
                 int x = 0;
                 if (hold != null) {
@@ -65,13 +68,13 @@ public class ChooseFileButton {
                             BufferedImage img = ImageIO.read(f);
                             SpecialImage s = new SpecialImage(img);
                             s.setID(x);
-                            b.add(s);
+                            this.images.add(s);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
                     }
                 }
-                obj.onDialogClose(b);
+                obj.onDialogClose(this);
             });
 
     }
@@ -82,4 +85,7 @@ public class ChooseFileButton {
     public Button getButton() {
         return this.upload;
     }
+    public String getCategory() {return this.category;}
+
+    public ArrayList<SpecialImage> getImages() {return this.images;}
 };

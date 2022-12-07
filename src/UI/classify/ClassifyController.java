@@ -21,12 +21,6 @@ import java.util.concurrent.ExecutionException;
 public class ClassifyController implements Controller {
 
     @FXML
-    private ProgressBar progressBar;
-
-    @FXML
-    private Label progressText;
-
-    @FXML
     private Label sliderText;
 
     @FXML
@@ -47,15 +41,19 @@ public class ClassifyController implements Controller {
 
 
     @Override
-    public void onDialogClose(ArrayList<SpecialImage> imgs) {
-        System.out.println(imgs);
-        ThreadDelegator td = new ThreadDelegator(imgs, (int) threadBar.getValue(), "classify");
+    public void onDialogClose(ChooseFileButton fileButton) {
+        System.out.println(fileButton.getImages());
+        ThreadDelegator td = new ThreadDelegator(fileButton.getImages(), (int) threadBar.getValue(), "classify");
+
+        List<HashMap<SpecialImage, String>> results;
 
         try {
-            List<HashMap<SpecialImage, String>> results =  td.send_commands();
+            results =  td.send_commands();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        System.out.println(results);
 
     }
 

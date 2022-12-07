@@ -12,10 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import src.ChooseFileButton;
+import src.SpecialImage;
+import src.ThreadDelegator;
+import src.UI.Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class CategoryNamesController {
+public class CategoryNamesController implements Controller {
     @FXML
     private Button train;
     @FXML
@@ -41,7 +45,7 @@ public class CategoryNamesController {
         // Gets the category name from each of teh forms
         for (Node n : forms.getChildren()) {
             if (n instanceof TextField) {
-                ChooseFileButton button = new ChooseFileButton(((TextField) n).getText());
+                ChooseFileButton button = new ChooseFileButton(((TextField) n).getText(), this);
                 button.setAction(thisStage);
                 trainButtons.getChildren().add(button.getButton());
             }
@@ -52,5 +56,10 @@ public class CategoryNamesController {
         stack.getChildren().remove(container);
         stack.getChildren().remove(scene.lookup("#borderPane"));
         stack.getChildren().add(trainButtons);
+    }
+
+    @Override
+    public void onDialogClose(ChooseFileButton fileButton) {
+//        ThreadDelegator td = new ThreadDelegator(fileButton.getImages(), (int) threadBar.getValue(), "upload", fileButton.getCategory());
     }
 }

@@ -6,12 +6,5 @@ import src.UI.Controller;
 
 import java.util.ArrayList;
 
-public class UploadController implements Controller {
-
-    @Override
-    public void onDialogClose(ArrayList<SpecialImage> imgs) {
-        String category = container
-        ThreadDelegator td = new ThreadDelegator(imgs, (int) threadBar.getValue(), "classify");
-    }
-
+public class UploadController {
 }
