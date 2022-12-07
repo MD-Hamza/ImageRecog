@@ -3,11 +3,13 @@ package src.UI.upload;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -18,13 +20,16 @@ import src.UI.Controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class CategoryNamesController implements Controller {
+    public Button back;
     @FXML
     private Button train;
     @FXML
     private AnchorPane container;
 
+    public Slider slider;
     /**
      * Adds buttons for each of the categories the user wants to train
      * For each button there the user will be able to choose files
@@ -41,8 +46,10 @@ public class CategoryNamesController implements Controller {
 
         VBox forms = (VBox) scene.lookup("#forms");
         HBox trainButtons = new HBox(10);
+        BorderPane sliderBox = new BorderPane();
+        sliderBox.setPadding(new Insets(10, 10, 50, 10));
 
-        // Gets the category name from each of teh forms
+        // Gets the category name from each of the forms
         for (Node n : forms.getChildren()) {
             if (n instanceof TextField) {
                 ChooseFileButton button = new ChooseFileButton(((TextField) n).getText(), this);
@@ -50,16 +57,47 @@ public class CategoryNamesController implements Controller {
                 trainButtons.getChildren().add(button.getButton());
             }
         }
+        Button finish = (Button) root.lookup("#finish");
 
         // Adds the buttons to the UI
         trainButtons.setAlignment(Pos.CENTER);
         stack.getChildren().remove(container);
         stack.getChildren().remove(scene.lookup("#borderPane"));
-        stack.getChildren().add(trainButtons);
+
+        slider = new Slider();
+        slider.setMax(10);
+        slider.setMin(1);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        sliderBox.setBottom(slider);
+        sliderBox.setCenter(trainButtons);
+        stack.getChildren().add(sliderBox);
+
     }
 
     @Override
     public void onDialogClose(ChooseFileButton fileButton) {
-//        ThreadDelegator td = new ThreadDelegator(fileButton.getImages(), (int) threadBar.getValue(), "upload", fileButton.getCategory());
+        ThreadDelegator td = new ThreadDelegator(fileButton.getImages(), 3, "upload", fileButton.getCategory());
+        try {
+            td.send_commands();
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void goBack(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../mainMenu.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = container.getScene();
+        StackPane stack = (StackPane) scene.getRoot();
+
+        stack.getChildren().clear();
+        stack.getChildren().add(root);
     }
 }
