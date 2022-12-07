@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,7 @@ public class ImagesToMap {
      * @param fileName is the filename of the file being accessed locally.
      */
     public void setMapofImage(String fileName) {
-        Image image = new Image(fileName);
+        Image image = new Image(new File(fileName).toURI().toString());
         ImageView imageView = new ImageView();
         imageView.setImage(image);
 

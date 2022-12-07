@@ -2,8 +2,8 @@ package src.UI;
 
 public class ModelViewMode {
 
-    final String DARK= "UI/DarkStyle.css";
-    final String LIGHT= "UI/style.css";
+    final String DARK= "DarkStyle.css";
+    final String LIGHT= "style.css";
     private String  currentViewMode = LIGHT;
 
     /**
