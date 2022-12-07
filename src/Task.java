@@ -44,5 +44,3 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
 
     }
 }
-
-
