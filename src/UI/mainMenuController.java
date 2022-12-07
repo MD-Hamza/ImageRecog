@@ -1,24 +1,18 @@
 
 package src.UI;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 import static javafx.application.Application.setUserAgentStylesheet;
 
 public class mainMenuController{
@@ -94,6 +88,12 @@ public class mainMenuController{
         return css;
     }
 
+
+    /**
+     * Switches to the classify view
+     * @param actionEvent
+     * @throws RuntimeException
+     */
 
     public void switchToClassify(ActionEvent actionEvent) {
         Parent root = null;
