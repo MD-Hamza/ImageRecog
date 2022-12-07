@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import src.UI.mainMenuController;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,14 +24,21 @@ public class ImageRecognition extends Application {
     private final FileChooser fileChooser = new FileChooser();
     private final FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif", "*.jpeg");
     private int maxThreads;
+
     @Override
     public void start(Stage stage) throws Exception {
         //Font.loadFont(getClass().getResource("UI/Inter-SemiBold.ttf").toExternalForm(), 10);
-        Parent root = FXMLLoader.load(getClass().getResource("UI/categoryNumber.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("UI/categoryNumber.fxml"));
         //Parent root = FXMLLoader.load(getClass().getResource("UI/mainMenu.fxml"));
-        Scene scene = new Scene(root);
 
-        String css = this.getClass().getResource("UI/DarkStyle.css").toExternalForm();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UI/mainMenu.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        mainMenuController controllerViewMode = loader.getController();
+        stage.setScene(scene);
+        String css = this.getClass().getResource(controllerViewMode.getCss()).toExternalForm();
+        //System.out.println(root.getClass());
         scene.getStylesheets().add(css);
         stage.setTitle("Upload");
         stage.setScene(scene);
