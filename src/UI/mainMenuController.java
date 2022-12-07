@@ -29,6 +29,11 @@ public class mainMenuController{
     @FXML
     private ToggleButton toggleView;
 
+    /**
+     * Switches to the catagoryNumber view
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void switchToClassify(ActionEvent event) throws IOException {
         //Parent root = FXMLLoader.load(getClass().getResource("UI/categoryNumber.fxml"));
@@ -38,6 +43,12 @@ public class mainMenuController{
 
 
     @FXML
+    /**
+     * On click of a toggle the current view is set to the dark mode css file to indicate dark mode. Sets to
+     * dark if the toggle is clicked and light otherwise.
+     * @param event
+     * @throws IOException
+     */
     private void setView(ActionEvent event) throws Exception {
 
 
@@ -56,6 +67,10 @@ public class mainMenuController{
         }
     }
 
+    /**
+     * Getter for the view mode. Commands the controller to set view to dark or light.
+     * @return
+     */
     public String getCss(){
         return css;
     }
