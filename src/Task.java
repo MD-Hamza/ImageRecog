@@ -9,9 +9,12 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
     private final List<SpecialImage> images;
     private final String command_type;
 
-    public Task(List<SpecialImage> images, String command_type) {
+    private final String category;
+
+    public Task(List<SpecialImage> images, String command_type, String category) {
         this.images = images;
         this.command_type = command_type;
+        this.category = category;
     }
 
     public HashMap<SpecialImage, String> get() {
@@ -30,7 +33,7 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
         else if (this.command_type.equalsIgnoreCase("upload")) {
 
             for (SpecialImage img : this.images) {
-                UploadCommand u = new UploadCommand(img.getImg());
+                UploadCommand u = new UploadCommand(img.getImg(), this.category);
                 results.put(img, u.getResult());
             }
 

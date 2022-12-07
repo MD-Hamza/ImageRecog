@@ -10,15 +10,18 @@ public class ThreadDelegator {
     public int max_threads;
     public List<SpecialImage> images;
     public int cluster_size;
+
+    public String category;
     private String command_type;
 
-    public ThreadDelegator(List<SpecialImage> images, int max_threads, String command_type) {
+    public ThreadDelegator(List<SpecialImage> images, int max_threads, String command_type, String...category) {
         this.max_threads = (max_threads > 0) ? max_threads : 1;
-        System.out.println(this.max_threads);
         this.images = images;
         this.cluster_size =  (int) (this.images.size() / this.max_threads);
         this.command_type = command_type;
+        this.category = (category.length >= 1) ? category[0] : null;
     }
+
 
     private List<List<SpecialImage>> partition_images() {
 
@@ -67,7 +70,7 @@ public class ThreadDelegator {
         List<List<SpecialImage>> parted_images = partition_images();
 
         for (List<SpecialImage> imgs : parted_images) {
-            Task x = new Task(imgs, this.command_type);
+            Task x = new Task(imgs, this.command_type, this.category);
             all_tasks.add(x);
         }
 
