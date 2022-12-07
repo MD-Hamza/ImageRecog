@@ -13,6 +13,7 @@ public class ThreadDelegator {
 
     public String category;
     private String command_type;
+    private String model;
 
     public ThreadDelegator(List<SpecialImage> images, int max_threads, String command_type, String...category) {
         this.max_threads = (max_threads > 0) ? max_threads : 1;
@@ -70,7 +71,7 @@ public class ThreadDelegator {
         List<List<SpecialImage>> parted_images = partition_images();
 
         for (List<SpecialImage> imgs : parted_images) {
-            Task x = new Task(imgs, this.command_type, this.category);
+            Task x = new Task(imgs, this.command_type, this.category, this.model);
             all_tasks.add(x);
         }
 
@@ -95,6 +96,10 @@ public class ThreadDelegator {
         return allTaskFutures.get();
 
 
+    }
+
+    public void setModel(String value) {
+        this.model = value;
     }
 
 

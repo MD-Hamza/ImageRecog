@@ -66,7 +66,7 @@ public class ChooseFileButton {
                         try {
                             x += 1;
                             BufferedImage img = ImageIO.read(f);
-                            SpecialImage s = new SpecialImage(img);
+                            SpecialImage s = new SpecialImage(img, f.getName());
                             s.setID(x);
                             this.images.add(s);
                         } catch (IOException ex) {
