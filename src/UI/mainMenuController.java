@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -30,16 +32,23 @@ public class mainMenuController{
     @FXML
     private ToggleButton toggleView;
 
+    @FXML
+    private AnchorPane anchorpane;
+
+    @FXML
+    private StackPane stack;
     /**
      * Switches to the catagoryNumber view
      * @param event
      * @throws IOException
      */
     @FXML
-    void switchToClassify(ActionEvent event) throws IOException {
+    void switchToUpload(ActionEvent event) throws IOException {
         //Parent root = FXMLLoader.load(getClass().getResource("UI/categoryNumber.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("categoryNames.fxml"));
-
+        Parent root = FXMLLoader.load(getClass().getResource("upload/categoryNumber.fxml"));
+        Scene scene = classify.getScene();
+        stack.getChildren().remove(anchorpane);
+        stack.getChildren().add(root);
     }
 
 
@@ -86,4 +95,14 @@ public class mainMenuController{
     }
 
 
+    public void switchToClassify(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("classify/classify.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stack.getChildren().remove(anchorpane);
+        stack.getChildren().add(root);
+    }
 }

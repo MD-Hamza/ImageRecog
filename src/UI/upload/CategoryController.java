@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -13,9 +15,8 @@ import javafx.scene.layout.*;
 import java.io.IOException;
 
 public class CategoryController {
-    @FXML
-    private StackPane stack;
 
+    public Button select;
     @FXML
     private AnchorPane anchorRoot;
 
@@ -23,6 +24,7 @@ public class CategoryController {
     private TextField categories;
     @FXML
     private Label errorLabel;
+
 
     /**
      * Loads the categoryNames scene after the button is clicked.
@@ -40,13 +42,18 @@ public class CategoryController {
         }
 
         if (numberOfCategories > 6) {
-            errorLabel.setText("Category limit of 5 exceeded");
+            errorLabel.setText("Category limit of 6 exceeded");
             return;
         }
+
+        Scene scene = errorLabel.getScene();
+        StackPane stack = (StackPane) scene.getRoot();
+        stack.getChildren().clear();
 
         Parent root = FXMLLoader.load(getClass().getResource("categoryNames.fxml"));
 
         BorderPane items = new BorderPane();
+        items.setMaxHeight(325);
         items.setId("borderPane");
 
         items.setPadding(new Insets(10, 20, (12 - numberOfCategories) * 15, 20));
@@ -58,15 +65,27 @@ public class CategoryController {
         for (int i = 0; i < numberOfCategories; i++) {
             TextField field = new TextField();
             field.setId(String.valueOf(i));
-            field.setMaxWidth(200);
+            field.setMaxWidth(300);
             container.getChildren().add(field);
         }
 
         // Adds all the components to the UI
         container.setAlignment(Pos.CENTER);
         items.setBottom(container);
-        stack.getChildren().add(items);
         stack.getChildren().add(root);
-        stack.getChildren().remove(anchorRoot);
+        stack.getChildren().add(items);
+    }
+
+    public void back(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../mainMenu.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = anchorRoot.getScene();
+        StackPane stack = (StackPane) scene.getRoot();
+        stack.getChildren().clear();
+        stack.getChildren().add(root);
     }
 }
