@@ -23,7 +23,11 @@ public class ThreadDelegator {
         this.category = (category.length >= 1) ? category[0] : null;
     }
 
-
+    /**
+     * Seperates images into equal partitions
+     * @return List<List<SpecialImage>>
+     *
+     */
     private List<List<SpecialImage>> partition_images() {
 
         List<List<SpecialImage>> partitions = new ArrayList<>();
@@ -65,6 +69,12 @@ public class ThreadDelegator {
         return partitions;
     }
 
+    /**
+     * Converts partitioned images in partition_images
+     * to Task objects
+     * @return List<Task>
+     *
+     */
     private List<Task> form_cluster() {
 
         List<Task> all_tasks = new ArrayList<>();
@@ -79,6 +89,11 @@ public class ThreadDelegator {
 
     }
 
+    /**
+     * Takes each cluster of Tasks and invokes them asynchronously.
+     * @return List<HashMap<SpecialImage, String>>
+     * @throws ExecutionException, InterruptedException
+     */
     public List<HashMap<SpecialImage, String>> send_commands() throws ExecutionException, InterruptedException {
         List<Task> cluster = form_cluster();
         ExecutorService pool = Executors.newFixedThreadPool(this.max_threads);
@@ -98,6 +113,9 @@ public class ThreadDelegator {
 
     }
 
+    /**
+     * Setter to set the model data should be classified from.
+     */
     public void setModel(String value) {
         this.model = value;
     }

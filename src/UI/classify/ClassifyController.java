@@ -15,11 +15,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser;
+
 import src.ChooseFileButton;
 import src.SpecialImage;
 import src.ThreadDelegator;
 import src.UI.Controller;
-import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -53,6 +54,11 @@ public class ClassifyController implements Controller {
 
     private Stage stage;
 
+
+    /**
+     * On initialize, Sets Upload buttons action to open file choosing dialog.
+     * Sets up dropdown such that it reflects folders in AllModels.
+     */
     @FXML
     protected void initialize() {
         ChooseFileButton button = new ChooseFileButton(uploadButton, this);
@@ -67,6 +73,10 @@ public class ClassifyController implements Controller {
 
             ObservableList<String> options = FXCollections.observableArrayList();
 
+            if (dir.listFiles() == null) {
+                return;
+            }
+
             for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (file.isDirectory()) {
                     options.add(file.getName());
@@ -80,7 +90,12 @@ public class ClassifyController implements Controller {
 
     }
 
-
+    /**
+     * Event that fires when file choosing dialog closes.
+     * Invokes ThreadDelegator to process images.
+     * Allows user to save classifications into a folder.
+     * @throws RuntimeException
+     */
     @Override
     public void onDialogClose(ChooseFileButton fileButton) {
 
@@ -139,6 +154,11 @@ public class ClassifyController implements Controller {
         }
     }
 
+    /**
+     * Event that fires when back button is clicked.
+     * Goes back to mainMenu.fxml
+     * @throws RuntimeException
+     */
     @FXML
     void goBack(ActionEvent event) {
 

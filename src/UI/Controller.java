@@ -1,12 +1,11 @@
 package src.UI;
-
 import src.ChooseFileButton;
-import src.SpecialImage;
-
-import java.util.ArrayList;
 
 public interface Controller {
 
+    /**
+     * Event that fires when the Choose File Dialog closes.
+     */
     public void onDialogClose(ChooseFileButton fileButton);
 
 }

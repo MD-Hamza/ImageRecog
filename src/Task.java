@@ -1,5 +1,6 @@
 package src;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
@@ -18,6 +19,11 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
         this.model = model;
     }
 
+    /**
+     * Allows each Thread to send commands depending on command type
+     * @return  HashMap<SpecialImage, String>
+     * @throws RuntimeException
+     */
     public HashMap<SpecialImage, String> get() {
 
         HashMap<SpecialImage, String> results = new HashMap<>();
@@ -25,8 +31,13 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
         if (this.command_type.equalsIgnoreCase("classify")) {
 
             for (SpecialImage img : this.images) {
-                ClassifyCommand c = new ClassifyCommand(img.getImg(), this.model);
-                results.put(img, c.reciever.getResult());
+                ClassifyCommand c = null;
+                try {
+                    c = new ClassifyCommand(img.getImg(), this.model);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                results.put(img, c.receiver.getResult());
             }
 
 
@@ -34,8 +45,13 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
         else if (this.command_type.equalsIgnoreCase("upload")) {
 
             for (SpecialImage img : this.images) {
-                UploadCommand u = new UploadCommand(img.getImg(), this.category);
-                results.put(img, u.reciever.getResult());
+                UploadCommand u = null;
+                try {
+                    u = new UploadCommand(img.getImg(), this.category);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                results.put(img, u.receiver.getResult());
             }
 
         }

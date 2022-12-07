@@ -1,32 +1,16 @@
 package src;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import src.UI.Controller;
-import src.UI.classify.ClassifyController;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ChooseFileButton {
     Button upload;
@@ -36,12 +20,22 @@ public class ChooseFileButton {
     private ArrayList<SpecialImage> images;
     private final FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png", "*.gif", "*.jpeg", "*.webp", "*.jfif");
 
+    /**
+     * Constructor for chooseFileButton
+     * @param category The category of the buttons that will be
+     * @param obj A reference to the controller
+     */
     public ChooseFileButton(String category, Controller obj) {
         this.category = category;
         this.upload = new Button(this.category);
         this.obj = obj;
     }
 
+    /**
+     * Button constructor for buttons that already exist
+     * @param btn A pre-existing button
+     * @param obj A reference to the controller
+     */
     public ChooseFileButton(Button btn, Controller obj) {
         this.category = null;
         this.upload = btn;
@@ -65,6 +59,7 @@ public class ChooseFileButton {
                 if (hold != null) {
                     for (File f : hold) {
                         try {
+                            // Goes through each user image and stores into image
                             x += 1;
                             BufferedImage img = ImageIO.read(f);
                             SpecialImage s = new SpecialImage(img, f.getName());
@@ -75,13 +70,7 @@ public class ChooseFileButton {
                         }
                     }
                 }
-//                try {
-//                    UploadCommand c = new UploadCommand(this.images.get(0).getImg(), "blue");
-//                } catch (FileNotFoundException e) {
-//                    throw new RuntimeException(e);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
+                // Calls the close logic in the controller
                 obj.onDialogClose(this);
             });
 
@@ -93,7 +82,16 @@ public class ChooseFileButton {
     public Button getButton() {
         return this.upload;
     }
+
+    /**
+     *
+     * @return the category where the file data will be stored
+     */
     public String getCategory() {return this.category;}
 
+    /**
+     *
+     * @return The images the user inputs
+     */
     public ArrayList<SpecialImage> getImages() {return this.images;}
 };
