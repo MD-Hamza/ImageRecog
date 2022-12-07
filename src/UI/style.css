@@ -9,6 +9,7 @@
   -fx-text-fill: #ffffff;
   -fx-font-size: 16px;
   -fx-background-color: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  -fx-background-radius: 15px;
   -fx-border-radius: 20;
   -fx-font-weight: 500;
   -fx-transition: box-shadow .2s ease-in-out;
@@ -28,7 +29,23 @@
   touch-action: manipulation;
   white-space: nowrap;*/
 }
+#classify{
+-fx-background-color: #89CFF0;
+-fx-text-fill: #000000;
+-fx-background-radius: 0px;
+}
+#upload{
+-fx-text-fill: #000000;
+-fx-background-color: #89CFF0;
+-fx-background-radius: 0px;
 
+       }
+#upload: hover{
+       -fx-background-color: 	#F0FFFF;
+       }
+#classify: hover{
+       -fx-background-color: 	#F0FFFF;
+       }
 .toggle-button {
   -fx-text-fill: #ffffff;
   -fx-background-color: linear-gradient(to bottom right, #5F0A87, #A4508B);
