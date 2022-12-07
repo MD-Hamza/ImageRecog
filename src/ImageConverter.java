@@ -5,8 +5,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageConvertor {
+public class ImageConverter {
 
+    /**
+     * This is the receiver for the UploadCommand which is called by execute. This is where the main bulk of the logic
+     * behind training the model happens.
+     * @param img: Takes in the image passed to be used to train the model.
+     * @param category: The category under which the image was passed to train the model.
+     * @throws IOException: This works with creating and deleting files which might cause IOException to be thrown.
+     */
     public void convertImage(BufferedImage img, String category) throws IOException {
         File mainFolder = new File("AllModels");
         if (!mainFolder.exists()){
@@ -28,5 +35,13 @@ public class ImageConvertor {
         TrainNaiveBayes m = new TrainNaiveBayes( "AllModels\\hold\\" + category + ".txt");
         m.Train();
         m.push(v);
+    }
+
+    /**
+     * This is the getResult method that returns the result of the command once executed.
+     * @return: Returns "success" since at this point the command has been successfully executed.
+     */
+    public String getResult() {
+        return "Success";
     }
 }
