@@ -61,15 +61,11 @@ public class mainMenuController{
 
             currentView.setDark();
             css = currentView.getCurrentViewMode();
-            //System.out.println(css);
-
-
 
         }
         else{
             currentView.setLight();
             css = currentView.getCurrentViewMode();
-            //System.out.println(css);
 
         }
 
