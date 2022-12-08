@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorRoot" prefHeight="401.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.UI.upload.CategoryController">
+   <Label layoutX="64.0" layoutY="132.0" text="Enter the number of categories that will be trained.">
+      <font>
+         <Font size="21.0" />
+      </font>
+   </Label>
+   <Button fx:id="select" layoutX="365.0" layoutY="205.0" mnemonicParsing="false" onAction="#loadCategoryNames" text="Enter">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </Button>
+   <TextField fx:id="categories" layoutX="131.0" layoutY="205.0">
+      <font>
+         <Font size="16.0" />
+      </font>
+   </TextField>
+   <Label fx:id="errorLabel" layoutX="79.0" layoutY="265.0" prefHeight="21.0" prefWidth="420.0">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Label>
+   <Button fx:id="back" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#back" prefHeight="36.0" prefWidth="70.0" text="Back" />
+</AnchorPane>

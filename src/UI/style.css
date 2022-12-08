@@ -1,0 +1,60 @@
+/* CSS */
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-family: "Inter-SemiBold";
+    src: url('./Inter-SemiBold.ttf');
+}
+.button {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 16px;
+  -fx-background-color: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+  -fx-background-radius: 15px;
+  -fx-border-radius: 20;
+  -fx-font-weight: 500;
+  -fx-transition: box-shadow .2s ease-in-out;
+/*  cursor: pointer;
+  display: inline-block;
+
+
+
+  line-height: 2.5;
+  outline: transparent;
+  padding: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;*/
+}
+#classify{
+-fx-background-color: #89CFF0;
+-fx-text-fill: #000000;
+-fx-background-radius: 0px;
+}
+#upload{
+-fx-text-fill: #000000;
+-fx-background-color: #89CFF0;
+-fx-background-radius: 0px;
+
+       }
+#upload: hover{
+       -fx-background-color: 	#F0FFFF;
+       }
+#classify: hover{
+       -fx-background-color: 	#F0FFFF;
+       }
+.toggle-button {
+  -fx-text-fill: #ffffff;
+  -fx-background-color: linear-gradient(to bottom right, #5F0A87, #A4508B);
+}
+
+.button:focus {
+  -fx-box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button:hover {
+  -fx-box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}

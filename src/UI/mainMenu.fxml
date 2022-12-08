@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="stack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.UI.mainMenuController">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="classify" layoutX="1.0" mnemonicParsing="false" onAction="#switchToClassify" prefHeight="400.0" prefWidth="299.0" text="Classify">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="upload" layoutX="300.0" mnemonicParsing="false" prefHeight="400.0" prefWidth="299.0" text="Upload">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ToggleButton fx:id="toggleView" layoutX="489.0" layoutY="40.0" mnemonicParsing="false" onAction="#setView" text="Dark Mode" />
+   </children>
+</AnchorPane>
+</StackPane>
