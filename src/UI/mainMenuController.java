@@ -1,22 +1,19 @@
 
 package src.UI;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
+import static javafx.application.Application.setUserAgentStylesheet;
 
 public class mainMenuController{
 
@@ -29,16 +26,23 @@ public class mainMenuController{
     @FXML
     private ToggleButton toggleView;
 
+    @FXML
+    private AnchorPane anchorpane;
+
+    @FXML
+    private StackPane stack;
     /**
      * Switches to the catagoryNumber view
      * @param event
      * @throws IOException
      */
     @FXML
-    void switchToClassify(ActionEvent event) throws IOException {
+    void switchToUpload(ActionEvent event) throws IOException {
         //Parent root = FXMLLoader.load(getClass().getResource("UI/categoryNumber.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("categoryNames.fxml"));
-
+        Parent root = FXMLLoader.load(getClass().getResource("upload/categoryNumber.fxml"));
+        Scene scene = classify.getScene();
+        stack.getChildren().remove(anchorpane);
+        stack.getChildren().add(root);
     }
 
 
@@ -58,22 +62,35 @@ public class mainMenuController{
             currentView.setDark();
             css = currentView.getCurrentViewMode();
 
-
         }
         else{
             currentView.setLight();
             css = currentView.getCurrentViewMode();
 
         }
+
+        toggleView.getScene().getStylesheets().clear();
+        setUserAgentStylesheet(null);
+
+        String newCss = this.getClass().getResource(css).toExternalForm();
+        toggleView.getScene().getStylesheets().add(newCss);
     }
+
+
 
     /**
-     * Getter for the view mode. Commands the controller to set view to dark or light.
-     * @return
+     * Switches to the classify view
+     * @param actionEvent
+     * @throws RuntimeException
      */
-    public String getCss(){
-        return css;
+    public void switchToClassify(ActionEvent actionEvent) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("classify/classify.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stack.getChildren().remove(anchorpane);
+        stack.getChildren().add(root);
     }
-
-
 }

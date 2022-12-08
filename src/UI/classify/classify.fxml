@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.UI.classify.ClassifyController">
+<AnchorPane fx:id="container" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.UI.classify.ClassifyController">
    <children>
-      <Button fx:id="uploadButton" layoutX="258.0" layoutY="227.0" mnemonicParsing="false" text="Upload Files" />
+      <Button fx:id="uploadButton" layoutX="258.0" layoutY="282.0" mnemonicParsing="false" text="Upload Files" />
       
-      <Slider fx:id="threadBar" blockIncrement="1.0" layoutX="193.0" layoutY="162.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="20.0" prefWidth="215.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
-      <Label fx:id="sliderText" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="113.0" prefHeight="18.0" prefWidth="175.0" text="Maximum Threads:" textAlignment="JUSTIFY">
+      <Slider fx:id="threadBar" blockIncrement="1.0" layoutX="193.0" layoutY="208.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="20.0" prefWidth="215.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="179.0" prefHeight="18.0" prefWidth="175.0" text="Maximum Threads:" textAlignment="JUSTIFY">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="dropdown" layoutX="226.0" layoutY="122.0" prefWidth="150.0" />
+      <Label fx:id="modelLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="95.0" prefHeight="18.0" prefWidth="175.0" text="Model:" textAlignment="JUSTIFY">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="23.0" layoutY="25.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
    </children>
 </AnchorPane>

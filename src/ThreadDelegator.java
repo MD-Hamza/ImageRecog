@@ -1,5 +1,6 @@
 package src;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,15 @@ public class ThreadDelegator {
 
     public String category;
     private String command_type;
+    private String model;
 
+    /**
+     * This is the constructor for ThreadDelegator.
+     * @param images: The images the user wants to classify or train.
+     * @param max_threads: Maximum amount of threads user wants to use to process images.
+     * @param command_type: Type of command being issued. Either upload (training) or classify.
+     * @param category: The category the images provided should be trained for (Only used for upload command_type).
+     */
     public ThreadDelegator(List<SpecialImage> images, int max_threads, String command_type, String...category) {
         this.max_threads = (max_threads > 0) ? max_threads : 1;
         this.images = images;
@@ -22,7 +31,11 @@ public class ThreadDelegator {
         this.category = (category.length >= 1) ? category[0] : null;
     }
 
-
+    /**
+     * Seperates images into equal partitions
+     * @return List<List<SpecialImage>>
+     *
+     */
     private List<List<SpecialImage>> partition_images() {
 
         List<List<SpecialImage>> partitions = new ArrayList<>();
@@ -64,13 +77,19 @@ public class ThreadDelegator {
         return partitions;
     }
 
+    /**
+     * Converts partitioned images in partition_images
+     * to Task objects
+     * @return List<Task>
+     *
+     */
     private List<Task> form_cluster() {
 
         List<Task> all_tasks = new ArrayList<>();
         List<List<SpecialImage>> parted_images = partition_images();
 
         for (List<SpecialImage> imgs : parted_images) {
-            Task x = new Task(imgs, this.command_type, this.category);
+            Task x = new Task(imgs, this.command_type, this.category, this.model);
             all_tasks.add(x);
         }
 
@@ -78,6 +97,11 @@ public class ThreadDelegator {
 
     }
 
+    /**
+     * Takes each cluster of Tasks and invokes them asynchronously.
+     * @return List<HashMap<SpecialImage, String>>
+     * @throws ExecutionException, InterruptedException
+     */
     public List<HashMap<SpecialImage, String>> send_commands() throws ExecutionException, InterruptedException {
         List<Task> cluster = form_cluster();
         ExecutorService pool = Executors.newFixedThreadPool(this.max_threads);
@@ -95,6 +119,13 @@ public class ThreadDelegator {
         return allTaskFutures.get();
 
 
+    }
+
+    /**
+     * Setter to set the model data should be classified from.
+     */
+    public void setModel(String value) {
+        this.model = value;
     }
 
 
