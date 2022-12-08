@@ -36,6 +36,11 @@ public class SpecialImage{
         return ID;
     }
 
+    /**
+     * This is the constructor for SpecialImage.
+     * @param b: Image converted to BufferedImage
+     * @param fileName: name of the file before conversion to BufferedImage
+     */
     public SpecialImage(BufferedImage b, String fileName){
         this.img = b;
         this.ID = 0;
