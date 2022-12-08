@@ -12,6 +12,13 @@ class Task implements Supplier<HashMap<SpecialImage, String>> {
     private final String category;
     private final String model;
 
+    /**
+     * This is the constructor for Task.
+     * @param images: The images the user wants to classify or train.
+     * @param command_type: Type of command being issued. Either upload (training) or classify.
+     * @param category: The category the images provided should be trained for (Only used for upload command_type).
+     * @param model: The model the images should be classified for (Only used for classify command_type).
+     */
     public Task(List<SpecialImage> images, String command_type, String category, String model) {
         this.images = images;
         this.command_type = command_type;
