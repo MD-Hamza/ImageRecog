@@ -1,5 +1,6 @@
 package src;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,13 @@ public class ThreadDelegator {
     private String command_type;
     private String model;
 
+    /**
+     * This is the constructor for ThreadDelegator.
+     * @param images: The images the user wants to classify or train.
+     * @param max_threads: Maximum amount of threads user wants to use to process images.
+     * @param command_type: Type of command being issued. Either upload (training) or classify.
+     * @param category: The category the images provided should be trained for (Only used for upload command_type).
+     */
     public ThreadDelegator(List<SpecialImage> images, int max_threads, String command_type, String...category) {
         this.max_threads = (max_threads > 0) ? max_threads : 1;
         this.images = images;
